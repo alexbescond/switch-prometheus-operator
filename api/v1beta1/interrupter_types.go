@@ -23,17 +23,18 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// SwtichSpec defines the desired state of Swtich
-type SwtichSpec struct {
+// InterrupterSpec defines the desired state of Interrupter
+type InterrupterSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// Foo is an example field of Swtich. Edit swtich_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+  // Revert timeout in seconds, when manual swich is triggered
+  RevertTimeoutInSeconds int `json:"reverttimeoutinseconds,omitempty"`
+
 }
 
-// SwtichStatus defines the observed state of Swtich
-type SwtichStatus struct {
+// InterrupterStatus defines the observed state of Interrupter
+type InterrupterStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 }
@@ -41,24 +42,24 @@ type SwtichStatus struct {
 //+kubebuilder:object:root=true
 //+kubebuilder:subresource:status
 
-// Swtich is the Schema for the swtiches API
-type Swtich struct {
+// Interrupter is the Schema for the interrupters API
+type Interrupter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   SwtichSpec   `json:"spec,omitempty"`
-	Status SwtichStatus `json:"status,omitempty"`
+	Spec   InterrupterSpec   `json:"spec,omitempty"`
+	Status InterrupterStatus `json:"status,omitempty"`
 }
 
 //+kubebuilder:object:root=true
 
-// SwtichList contains a list of Swtich
-type SwtichList struct {
+// InterrupterList contains a list of Interrupter
+type InterrupterList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []Swtich `json:"items"`
+	Items           []Interrupter `json:"items"`
 }
 
 func init() {
-	SchemeBuilder.Register(&Swtich{}, &SwtichList{})
+	SchemeBuilder.Register(&Interrupter{}, &InterrupterList{})
 }

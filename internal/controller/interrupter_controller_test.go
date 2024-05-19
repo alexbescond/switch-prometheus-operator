@@ -30,7 +30,7 @@ import (
 	switchv1beta1 "github.com/alexbescond/switch-prometheus-operator/api/v1beta1"
 )
 
-var _ = Describe("Swtich Controller", func() {
+var _ = Describe("Interrupter Controller", func() {
 	Context("When reconciling a resource", func() {
 		const resourceName = "test-resource"
 
@@ -40,13 +40,13 @@ var _ = Describe("Swtich Controller", func() {
 			Name:      resourceName,
 			Namespace: "default", // TODO(user):Modify as needed
 		}
-		swtich := &switchv1beta1.Swtich{}
+		interrupter := &switchv1beta1.Interrupter{}
 
 		BeforeEach(func() {
-			By("creating the custom resource for the Kind Swtich")
-			err := k8sClient.Get(ctx, typeNamespacedName, swtich)
+			By("creating the custom resource for the Kind Interrupter")
+			err := k8sClient.Get(ctx, typeNamespacedName, interrupter)
 			if err != nil && errors.IsNotFound(err) {
-				resource := &switchv1beta1.Swtich{
+				resource := &switchv1beta1.Interrupter{
 					ObjectMeta: metav1.ObjectMeta{
 						Name:      resourceName,
 						Namespace: "default",
@@ -59,16 +59,16 @@ var _ = Describe("Swtich Controller", func() {
 
 		AfterEach(func() {
 			// TODO(user): Cleanup logic after each test, like removing the resource instance.
-			resource := &switchv1beta1.Swtich{}
+			resource := &switchv1beta1.Interrupter{}
 			err := k8sClient.Get(ctx, typeNamespacedName, resource)
 			Expect(err).NotTo(HaveOccurred())
 
-			By("Cleanup the specific resource instance Swtich")
+			By("Cleanup the specific resource instance Interrupter")
 			Expect(k8sClient.Delete(ctx, resource)).To(Succeed())
 		})
 		It("should successfully reconcile the resource", func() {
 			By("Reconciling the created resource")
-			controllerReconciler := &SwtichReconciler{
+			controllerReconciler := &InterrupterReconciler{
 				Client: k8sClient,
 				Scheme: k8sClient.Scheme(),
 			}

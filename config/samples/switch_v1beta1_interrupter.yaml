@@ -1,12 +1,12 @@
 apiVersion: switch.alexbescond.io/v1beta1
-kind: Swtich
+kind: Interrupter
 metadata:
   labels:
-    app.kubernetes.io/name: swtich
-    app.kubernetes.io/instance: swtich-sample
+    app.kubernetes.io/name: interrupter
+    app.kubernetes.io/instance: interrupter-sample
     app.kubernetes.io/part-of: switch-prometheus-operator
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: switch-prometheus-operator
-  name: swtich-sample
+  name: interrupter-sample
 spec:
   # TODO(user): Add fields here

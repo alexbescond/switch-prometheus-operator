@@ -17,7 +17,7 @@ resources:
   controller: true
   domain: alexbescond.io
   group: switch
-  kind: Swtich
+  kind: Interrupter
   path: github.com/alexbescond/switch-prometheus-operator/api/v1beta1
   version: v1beta1
 version: "3"

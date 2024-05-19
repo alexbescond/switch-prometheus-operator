@@ -27,36 +27,43 @@ import (
 	switchv1beta1 "github.com/alexbescond/switch-prometheus-operator/api/v1beta1"
 )
 
-// SwtichReconciler reconciles a Swtich object
-type SwtichReconciler struct {
+// InterrupterReconciler reconciles a Interrupter object
+type InterrupterReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
 }
 
-//+kubebuilder:rbac:groups=switch.alexbescond.io,resources=swtiches,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=switch.alexbescond.io,resources=swtiches/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=switch.alexbescond.io,resources=swtiches/finalizers,verbs=update
+//+kubebuilder:rbac:groups=switch.alexbescond.io,resources=interrupters,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=switch.alexbescond.io,resources=interrupters/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=switch.alexbescond.io,resources=interrupters/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
 // TODO(user): Modify the Reconcile function to compare the state specified by
-// the Swtich object against the actual cluster state, and then
+// the Interrupter object against the actual cluster state, and then
 // perform operations to make the cluster state reflect the state specified by
 // the user.
 //
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.16.3/pkg/reconcile
-func (r *SwtichReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+func (r *InterrupterReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	_ = log.FromContext(ctx)
 
 	// TODO(user): your logic here
+	var interrupter switchv1beta1.Interrupter
+	if err := r.Get(ctx, req.NamespacedName, &interrupter); err != nil {
+		log.Log.Error(err, "unable to fetch Interrupter")
+		return ctrl.Result{}, err
+	}
+
+	log.Log.Info("Reconciling Interrupter", "Interrupter", interrupter)
 
 	return ctrl.Result{}, nil
 }
 
 // SetupWithManager sets up the controller with the Manager.
-func (r *SwtichReconciler) SetupWithManager(mgr ctrl.Manager) error {
+func (r *InterrupterReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&switchv1beta1.Swtich{}).
+		For(&switchv1beta1.Interrupter{}).
 		Complete(r)
 }

@@ -1,4 +1,4 @@
 ## Append samples of your project ##
 resources:
-- switch_v1beta1_swtich.yaml
+- switch_v1beta1_interrupter.yaml
 #+kubebuilder:scaffold:manifestskustomizesamples
